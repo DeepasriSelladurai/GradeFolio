@@ -1,1 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+
+  <style>
+    body{
+        background-color: #fff;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark-mode , td.dark-mode{
+        background-color: #232b2b;
+        color: #f0f2f5;
+    }
+    * {
+        font-weight: bold;
+    }
+  </style>
+  <title>{% block title %}{%endblock %}</title>
+  <link rel="webicon" href="{{ url_for('static', filename='gradefolio_studentGirl.jpeg') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="{{ url_for('static', filename='js/grades.js') }}"></script>
+
+</head>
+<body style="font-family: 'PACIFICO',cursive;">
+
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="#">GradeFolio</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Register <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/login">Login</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+      <a class="nav-item nav-link" href="/profile">Profile</a>
+      <a class="nav-item nav-link" href="/home">Home</a>
+    </div>
+  </div>
+</nav>
+
+<!--p><b>HELLO</b><br><br><br>Upon logging in, you will find a dashboard that displays your recent grades, assignments, and exam results. The visual representation of your scores allows you to quickly grasp your academic standing and identify areas that may need improvement. Additionally, our system provides insightful analytics and reports that help you understand your performance trends over time.
+
+  <br><br><br>This project is currently under construction, and we are working diligently to bring you the best possible experience. As we continue to develop and enhance the platform, you may encounter some incomplete features or sections that are still being built. We appreciate your patience and understanding as we strive to create a robust and reliable system for managing student results.
+  
+  Our team is committed to ensuring that you have access to accurate and timely information about your academic journey. We are also working on integrating new features, such as personalized study recommendations, interactive progress charts, and real-time notifications for important updates.
+  
+  <br><br><br>In the meantime, we encourage you to explore the available features and provide us with your valuable feedback. Your input is crucial in helping us improve the system and tailor it to meet your needs. We are here to support you every step of the way and are dedicated to making your experience as seamless as possible.
+  
+  Thank you for being a part of the Student Results Management System. We look forward to continuing to serve you and helping you achieve your academic goals. Stay tuned for exciting updates and new features that will enhance your experience on our platform!</p>
+
+-->
+<script>
+  function toggleMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+  }
+</script>
+<style>
+  body{
+      background-color: #fff;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark-mode {
+      background-color: #232b2b;
+      color: #f0f2f5;
+  }
+  * {
+      font-weight: bold;
+  }
+</style>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+{% block content %}{% endblock %}
+</body>
+</html>
 
