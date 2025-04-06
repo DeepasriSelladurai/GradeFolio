@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Leaderboard - Admin View</h1>
+    <style>
+        .leaderboard-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px; /* Ensures table doesn't shrink too much */
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .leaderboard-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .leaderboard-table tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <table border="1" class="leaderboard-table">
+        <thead>
+            <tr>
+            <th>Name</th>
+            {% set subjects = ["PROGRAMMING IN C","DATA STRUCTURES AND ALGORITHMS","COMPUTER ORGANIZATION AND ARCHITECHTURE","RELATIONAL DATABASE MANAGEMENT SYSTEM","COMPUTER NETWORK","PROGRAMMING IN JAVA","OPERATING SYSTEM","WEB TECHNOLOGY","LINUX AND SHELL PROGRAMMING","SOFTWARE ENGINEERING"] %}
+            {% for subject in subjects %}
+            <th>{{ subject }}</th>
+            {% endfor %}
+            {% set practicals = ["PROGRAMMING IN C", "DATA STRUCTURES USING C", "SQL FOR RDBMS", "PROGRAMMING IN JAVA", "WEB TECHNOLOGY", "LINUX AND SHELL PROGRAMMING", "MOBILE APPLICATION DEVELOPMENT"] %}
+            {% for practical in practicals %}
+            <th>{{ practical }} PRACTICAL</th>
+            {% endfor %}
+            <th>Allied Maths Theory-1</th>
+            <th>Allied Maths Theory-2</th>
+            <th>Allied Maths Practical</th>
+            <th>Allied Physics Theory-1</th>
+            <th>Allied Physics Theory-2</th>
+            <th>Allied Physics Practical</th>
+            <th>Rank</th>
+            <th>Marks</th>
+            <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in collection %}
+            <tr>
+                <td>{{ entry.name }}</td>
+                <td>{{ entry.subject1 }}</td>
+                <td>{{ entry.subject2 }}</td>
+                <td>{{ entry.subject3 }}</td>
+                <td>{{ entry.subject4 }}</td>
+                <td>{{ entry.subject5 }}</td>
+                <td>{{ entry.subject6 }}</td>
+                <td>{{ entry.subject7 }}</td>
+                <td>{{ entry.subject8 }}</td>
+                <td>{{ entry.subject9 }}</td>
+                <td>{{ entry.subject10 }}</td>
+                <td>{{ entry.practical1 }}</td>
+                <td>{{ entry.practical2 }}</td>
+                <td>{{ entry.practical3 }}</td>
+                <td>{{ entry.practical4 }}</td>
+                <td>{{ entry.practical5 }}</td>
+                <td>{{ entry.practical6 }}</td>
+                <td>{{ entry.practical7 }}</td>
+                <td>{{ entry.a1t1 }}</td>
+                <td>{{ entry.a1t2 }}</td>
+                <td>{{ entry.a1p }}</td>
+                <td>{{ entry.a2t1 }}</td>
+                <td>{{ entry.a2t2 }}</td>
+                <td>{{ entry.a2p }}</td>
+                <td>{{ loop.index }}</td>
+                <td>
+                    {% set marks = (entry.subject1 | int) + (entry.subject2 | int) + (entry.subject3 | int) + (entry.subject4 | int) + (entry.subject5 | int) +
+                                   (entry.subject6 | int) + (entry.subject7 | int) + (entry.subject8 | int) + (entry.subject9 | int) + (entry.subject10 | int) +
+                                   (entry.practical1 | int) + (entry.practical2 | int) + (entry.practical3 | int) + (entry.practical4 | int) +
+                                   (entry.practical5 | int) + (entry.practical6 | int) + (entry.practical7 | int) +
+                                   (entry.a1t1 | int) + (entry.a1t2 | int) + (entry.a1p | int) + (entry.a2t1 | int) + (entry.a2t2 | int) + (entry.a2p | int) %}
+                    {{ marks }}
+                </td>
+                <td>{{ ((marks | int) / 22) | round(2) }}%</td>
+            </tr>
+            
+                
+            
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    
+</div>
+
+{% endblock %}
