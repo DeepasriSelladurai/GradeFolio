@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Faculty List</h2>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Subject ID</th>
+                <th>Subject Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set subjects = ["PROGRAMMING IN C", "DATA STRUCTURES AND ALGORITHMS", "COMPUTER ORGANIZATION AND ARCHITECTURE", "RELATIONAL DATABASE MANAGEMENT SYSTEM", "COMPUTER NETWORK", "PROGRAMMING IN JAVA", "OPERATING SYSTEM", "WEB TECHNOLOGY", "LINUX AND SHELL PROGRAMMING", "SOFTWARE ENGINEERING"] %}
+            {% for subject_id in range(10) %}
+            <tr>
+            <td>{{ 'SUBJECT'+(subject_id+1) | string }}</td>
+            <td>{{ subjects[subject_id] }}</td>
+            <td><a href="{{ url_for('faculty_view', subject_id='subject'+(subject_id+1)|string) }}" class="btn btn-primary btn-sm">View</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
