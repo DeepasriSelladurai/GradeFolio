@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradefolio - Student Result Management System</title>
+    <style>
+        body {
+            font-family: 'pacifico', cursive;
+            /*background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            */
+            background: linear-gradient(to left, #33FFD7, #3375FF, #8A33FF, #FF33B8);
+            margin:  0;
+            padding: 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            /*background: linear-gradient(to right, #FF5733, #FFBD33, #75FF33, #33FF57, #33FFD7, #3375FF, #8A33FF, #FF33B8);
+            */
+            color: linear-gradient(to right, #FF5733, #FFBD33, #75FF33, #33FF57, #33FFD7, #3375FF, #8A33FF, #FF33B8);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        h1:hover{
+            color: linear-gradient(to right, #FF5733, #FFBD33, #75FF33, #33FF57, #33FFD7, #3375FF, #8A33FF, #FF33B8);
+        }
+        p {
+            text-transform: capitalize;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 50px;
+            opacity: 0;
+            transition: opacity 0.7s, transform 0.7s;
+        }
+        .container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        .btn {
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.7s;
+        }
+        .btn:hover {
+            background-color: #ff4c39;
+        }
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0;
+            opacity: 0;
+            gap: 25%;
+            transition: opacity 0.7s, transform 0.7s;
+        }
+        .info-section.show {
+            opacity: 1;
+        }
+        .info-title {
+            font-size: 2em;
+            text-align: right;
+            color: #333;
+            flex-basis: 100%;
+        }
+        .info-content {
+            font-size: 1.2em;
+            color: #666;
+            flex-basis: 50%;
+            text-align: left;
+            transform: translateX(-100px);
+            transition: transform 0.7s;
+        }
+        .info-content.show {
+            transform: translateX(0);
+        }
+        .info-image {
+            flex-basis: 50%;
+            transform: translateX(100px);
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.7s;
+        }
+        .info-image.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Welcome to Gradefolio</h1>
+        <p>Your reliable student result management system.</p>
+        <br>
+        <p>"In a realm of dreams and golden gleams,<br> Where knowledge whispers and ambition beams, <br>Your journey unfolds in hues so bold, <br> Gradefolio's tale of triumph told."</p>
+        <p class="author">-Copilot <br> [ The AI pair programmer of GradeFolio Developer ]</p>
+        <br>
+        <div class="buttons">
+            <button class="btn" onclick="window.location.href='index'">Register</button>
+            <button class="btn" onclick="window.location.href='login'">Login</button>
+            <button class="btn" onclick="window.location.href='leaderboard'">Leaderboard</button>
+            <br>
+            <button class="btn" onclick="window.location.href='faculty'">Faculty</button>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br>
+
+    <div class="info-section">
+        <h2 class="info-title">Visualize Your Results</h2>
+        <!--<p class="info-content">Easily track and visualize your academic performance over time with interactive charts and graphs that provide insightful analyses of your progress. Our system transforms your grades and scores into visually appealing graphs, making it simple to understand trends and patterns. You can compare your current performance with past semesters and set goals for future improvement. The intuitive interface allows you to dive deep into individual subjects and assessments, helping you identify strengths and areas for improvement. Customizable filters let you focus on specific time periods or courses. Additionally, the interactive nature of the charts ensures you stay engaged with your academic journey. Share your visual reports with peers, mentors, or potential employers to showcase your achievements. Gradefolio aims to make academic tracking not just informative but also motivating and inspiring.</p>-->
+        <img src="{{ url_for('static', filename='images/gradefolio_lapVisual.jpeg') }}" alt="Visualize Your Academic Results" class="info-image" style="width: 100%; box-shadow: 10px 10px 20px rgba(0,0,0,0.1); margin-top: 20px;">
+    </div>
+    <br><br><br><br><br><br><br><br>
+
+    <div class="info-section">
+        <h2 class="info-title">Download Your Reports</h2>
+        <!--<p class="info-content">Get detailed reports of your academic achievements that you can download and share with hiring organizations and on LinkedIn. These comprehensive reports include your grades, test scores, and other academic milestones, presented in a polished and professional format. The reports are designed to highlight your strengths and accomplishments, making it easy for employers to see your potential. With just a few clicks, you can download these reports as PDFs and attach them to job applications or your LinkedIn profile. Showcase your academic journey with confidence and impress hiring managers with well-organized and visually appealing documentation. Gradefolio ensures that your academic achievements are presented in the best possible light, helping you stand out in a competitive job market.</p>-->
+        <img src="{{ url_for('static', filename='images/gradefolio_reportCard.jpeg') }}" alt="Download Your Reports" class="info-image" style="width: 100%; margin-top: 20px;">
+    </div>
+    <br><br><br><br><br><br><br><br>
+
+    <div class="info-section">
+        <h2 class="info-title">View the Leaderboard</h2>
+        <!--<p class="info-content">Get detailed reports of your academic achievements that you can download and share with hiring organizations and on LinkedIn. These comprehensive reports include your grades, test scores, and other academic milestones, presented in a polished and professional format. The reports are designed to highlight your strengths and accomplishments, making it easy for employers to see your potential. With just a few clicks, See how you rank among your peers with our real-time leaderboard, showcasing top performers. The leaderboard updates dynamically, providing you with the latest rankings and helping you stay motivated. Whether you aim to top the charts or simply track your progress, our leaderboard offers a transparent and engaging way to measure your academic success. Celebrate your achievements and challenge yourself to reach new heights.</p>-->
+        <img src="{{ url_for('static', filename='images/gradefolio_studentGirl.jpeg') }}" alt="View the Leaderboard" class="info-image" style="width: 100%; margin-top: 20px;">
+    </div>
+    <br><br><br><br><br><br><br><br>
+
+    <div class="container">
+        <div style="flex: 1; margin: 10px;">
+          <p><strong>Our System Helps You With:</strong></p>
+          <ul style="list-style-type: none; padding: 5%; text-align:left;">
+            <li>📊 <strong>Accurate Results</strong>: Get precise student results and analytics.</li>
+            <br>
+            <li>📝 <strong>Comprehensive Reports</strong>: Generate detailed academic reports.</li>
+            <br>
+            <li>🔒 <strong>Data Security</strong>: Ensure student data is protected with top-notch security.</li>
+            <br>
+            <li>📈 <strong>Performance Tracking</strong>: Monitor student progress over time.</li>
+            <br>
+            <li>💬 <strong>Feedback & Communication</strong>: Facilitate easy communication between teachers, students, and parents.</li>
+          </ul>
+          <h3>Your trusted partner in academic excellence and student success!</h3>
+        </div>
+      </div>
+
+    <br><br><br><br><br><br><br><br>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.container, .info-section');
+            const options = {
+                threshold: 0.7
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        if (entry.target.querySelector('.info-content')) {
+                            entry.target.querySelector('.info-content').classList.add('show');
+                        }
+                        if (entry.target.querySelector('.info-image')) {
+                            entry.target.querySelector('.info-image').classList.add('show');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            containers.forEach(container => {
+                container.style.transform = 'translateY(50px)';
+                observer.observe(container);
+            });
+        });
+    </script>
+    <br><br><br><br><br><br><br><br>
+
+    <footer>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; text-align: center;">
+          <div style="flex: 1; margin: 10px;">
+            <p>&copy; 2025 Gradefolio Student Result Management System. All rights reserved.</p>
+            <p>Developed by Gradefolio Team | <a href="mailto:support@gradefolio.com">Contact Us</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+          </div>
+          <div style="flex: 1; margin: 10px;">
+            <p>Follow us on:</p>
+            <p>
+              <a href="https://www.facebook.com/gradefolio" target="_blank">Facebook</a> |
+              <a href="https://www.twitter.com/gradefolio" target="_blank">Twitter</a> |
+              <a href="https://www.instagram.com/gradefolio" target="_blank">Instagram</a>
+            </p>
+          </div>
+          <div style="flex: 1; margin: 10px;">
+            <p>Visit our <a href="blog.html">Blog</a> for the latest updates and articles.</p>
+            <p>Useful Links:</p>
+            <p>
+              <a href="faq.html">FAQ</a> | 
+              <a href="support.html">Support</a> |
+              <a href="about.html">About Us</a> | 
+              <a href="careers.html">Careers</a>
+            </p>
+          </div>
+          <div style="flex: 1; margin: 10px;">
+            <p>Address: 123, Gradefolio Street, Knowledge City, Tamil Nadu, India</p>
+            <p>Phone: +91-1234567890</p>
+            <p>Business Hours: Monday - Friday, 9:00 AM - 6:00 PM IST</p>
+          </div>
+        </div>
+        <br><br><br><br><br><br><br><br>
+
+    </footer>
+    <br><br><br><br><br><br><br><br>
+      
+</body>
+</html>
