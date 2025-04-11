@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .leaderboard-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .leaderboard-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .leaderboard-table th,
+    .leaderboard-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .leaderboard-table th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .leaderboard-table tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+<br>
+<div class="leaderboard-container">
+    <br>
+
+    <h1>Leaderboard</h1>
+    
+    <br>
+    <table class="leaderboard-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for entry in collection | sort(attribute='percentage', reverse=True) %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ entry.name }}</td>
+                <td>
+                    {% set marks = (entry.subject1 | int) + (entry.subject2 | int) + (entry.subject3 | int) + (entry.subject4 | int) + (entry.subject5 | int) +
+                                   (entry.subject6 | int) + (entry.subject7 | int) + (entry.subject8 | int) + (entry.subject9 | int) + (entry.subject10 | int) +
+                                   (entry.practical1 | int) + (entry.practical2 | int) + (entry.practical3 | int) + (entry.practical4 | int) +
+                                   (entry.practical5 | int) + (entry.practical6 | int) + (entry.practical7 | int) +
+                                   (entry.a1t1 | int) + (entry.a1t2 | int) + (entry.a1p | int) + (entry.a2t1 | int) + (entry.a2t2 | int) + (entry.a2p | int) %}
+                    {{ marks }}
+                </td>
+                <td>{{ ((marks | int) / 22) | round(2) }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
