@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Youv'e logged in {% endblock %}
+
+{% block content %}
+<div style="text-align: center;padding: 5% 15%;"> <br><b>You have Logged in as {{ name }}</b><br><br><br><h2>Welcome to GRADEFOLIO</h2> <br><br> the Reliable Student Results Management System!<br><br><br> You have successfully logged in, and we are excited to have you here. This platform is designed to provide you with easy access to your academic performance and visual results. Whether you're a student eager to track your progress or a parent keen on staying updated with your child's achievements, our system aims to offer a user-friendly and comprehensive experience.
+
+<br><br><br><p style="text-align: center;"><br><br><b></b></p><br><br><br>
+<img src="{{ url_for('static', filename='images/gradefolio_studentGirl.jpeg') }}" alt="Profile Picture" class="profile-pic" height="50%" width="50%" style="padding: 10px;">
+<br><p style="padding: 5% 5%;"> Upon logging in, you will find a dashboard that displays your recent grades, assignments, and exam results. The visual representation of your scores allows you to quickly grasp your academic standing and identify areas that may need improvement. Additionally, our system provides insightful analytics and reports that help you understand your performance trends over time.
+
+<br><br><br><br><br>This project is currently under construction, and we are working diligently to bring you the best possible experience. As we continue to develop and enhance the platform, you may encounter some incomplete features or sections that are still being built. We appreciate your patience and understanding as we strive to create a robust and reliable system for managing student results.
+
+Our team is committed to ensuring that you have access to accurate and timely information about your academic journey. We are also working on integrating new features, such as personalized study recommendations, interactive progress charts, and real-time notifications for important updates.
+
+<br><br><br><br><br>In the meantime, we encourage you to explore the available features and provide us with your valuable feedback. Your input is crucial in helping us improve the system and tailor it to meet your needs. We are here to support you every step of the way and are dedicated to making your experience as seamless as possible.
+
+Thank you for being a part of the Student Results Management System. We look forward to continuing to serve you and helping you achieve your academic goals. Stay tuned for exciting updates and new features that will enhance your experience on our platform!</p></div>
+<div style="display: flex; justify-content: center; gap: 20px; padding: 20px;">
+    <a href="{{ url_for('start') }}" class="btn btn-primary" style="background-color: aqua; padding: 10px 20px; font-weight: bolder; border-radius: 10px; text-decoration: none;">Get Started</a>
+    <button onclick="toggleMode()" style="background-color: transparent; border: none; cursor: pointer;">
+        <img src="{{ url_for('static', filename='images/mode_icon.jpeg') }}" alt="Toggle Mode" style="height: 20px; width: 20px;">
+    </button>
+    <a href="{{ url_for('profile') }}" class="btn btn-secondary" style="background-color: aqua; padding: 10px 20px; font-weight: bolder; border-radius: 10px; text-decoration: none;">Profile</a>
+</div>
+<br><br><br><br><br><br><br>
+<script>
+    function toggleMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode');
+    }
+</script>
+<style>
+    body{
+        background-color: #fff;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+        background-color: #232b2b;
+        color: #f0f2f5;
+    }
+    * {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
