@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Register System{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center;">You are Signed out!</h1>
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
+    <div id="notification" style="display: none; text-align: center; margin-top: 20px;">
+        <p><strong>You have successfully signed out!</strong></p>
+    </div>
+    <script>
+        window.onload = function() {
+            var notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            var count = 3;
+            var countdown = setInterval(function() {
+                if (count > 0) {
+                    notification.innerHTML = '<p><strong>You have successfully signed out! (' + count + ')</strong></p>';
+                    count--;
+                } else {
+                    clearInterval(countdown);
+                    notification.style.display = 'none';
+                }
+            }, 1000);
+        };
+    </script>
+    <p><strong>Thank you for visiting our site. We hope to see you again soon!</strong></p>
+    <p><strong>If you have any feedback or comments, please let us know.</strong></p>
+</div>
+{% endblock %}
