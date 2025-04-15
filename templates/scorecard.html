@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <style>
+        input{
+            border: none;
+            background: none;
+        }
+        h4{
+            text-align: center;
+            padding: 5%;
+        }
+        .navs{
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        #bar-chart, #scatter-chart , #pie-chart{
+        width: 100%;
+        height: 100%;
+        padding: 15%;
+        display:flex;
+        justify-content: center;
+        margin-top: 20px;
+        background: #f9f9f9;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        }
+        .visuals{
+            padding: 5%;
+        }
+    </style>
+    <div class="row mt-5" style="display: none;">
+        <div class="col-md-4 text-center">
+            <br><br><br><br>
+            <img src="{{ url_for('static', filename='images/profile_pic.jpeg') }}" alt="Profile Picture" class="profile-pic" height="250px" width="250px">
+            <div class="highlighted-name" style="padding: 20px;"><h1><b>{{ name }}</b></h1></div>
+        </div>
+        <div class="col-md-8">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="student-details">
+                    <h4>Student Details</h4>
+                    <p><strong>Email:</strong> <input type="text" value="{{ details_dict.email }}" readonly style="border: none; width: 100%;"></p><br>
+                    <p><strong>Mobile Number:</strong> <input type="text" value="{{ details_dict.phone }}" readonly style="border: none; width: 100%;"></p><br>
+                    <p><strong>Register Number:</strong> <input type="text" value="{{ details_dict.register_number }}" readonly style="border: none; width: 100%;"></p><br>
+                    <p><strong>Roll Number:</strong> <input type="text" value="{{ details_dict.roll_number }}" readonly style="border: none; width: 100%;"></p><br>
+                    <a href="{{ url_for('update') }}" class="btn btn-primary" style="background-color: aqua; padding: 10px 20px; font-weight: bolder; border-radius: 10px; text-decoration: none;">Update</a>
+                    <a href="{{ url_for('scorecard') }}" class="btn btn-primary" style="background-color: aqua; padding: 10px 20px; font-weight: bolder; border-radius: 10px; text-decoration: none;">Scorecard</a>
+
+                </div>
+                <div class="academic-details">
+                    <h4>Academic Details</h4>
+                    <p><strong>Grade:</strong> <input type="text" id="grade" readonly style="border: none; width: 100%;"></p><br>
+                    <p><strong>Class Division:</strong> <input type="text" id="class-division" readonly style="border: none; width: 100%;"></p><br>
+                    {% set total = details_dict.subject1|int + details_dict.subject2|int + details_dict.subject3|int + details_dict.subject4|int + details_dict.subject5|int + details_dict.subject6|int + details_dict.subject7|int + details_dict.subject8|int + details_dict.subject9|int + details_dict.subject10|int + details_dict.practical1|int + details_dict.practical2|int + details_dict.practical3|int + details_dict.practical4|int + details_dict.practical5|int + details_dict.practical6|int + details_dict.practical7|int %}
+                    <p><strong>Total Marks:</strong> <input type="text" value="{{ total }}" readonly style="border: none; width: 100%;"></p><br>
+                    {% set percentage = (total / 17)|short_int %}
+                    <p><strong>Percentage:</strong> <input type="text" id="percentage" value="{{ percentage }}" readonly style="border: none; width: 100%;"></p><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    
+    <div class="row data-visuals">
+        <div class="col-md-12">
+        
+            <BR>
+            <div class="container">
+                {% set marks = [details_dict.subject1|int, details_dict.subject2|int, details_dict.subject3|int, details_dict.subject4|int, details_dict.subject5|int, details_dict.subject6|int, details_dict.subject7|int, details_dict.subject8|int, details_dict.subject9|int, details_dict.subject10|int] %}
+                {% set subjects = ["PROGRAMMING IN C","DATA STRUCTURES AND ALGORITHMS","COMPUTER ORGANIZATION AND ARCHITECHTURE","RELATIONAL DATABASE MANAGEMENT SYSTEM","COMPUTER NETWORK","PROGRAMMING IN JAVA","OPERATING SYSTEM","WEB TECHNOLOGY","LINUX AND SHELL PROGRAMMING","SOFTWARE ENGINEERING"] %}
+                
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h4>THEORY MARKS</h4>
+                    
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Marks</th>
+                                    <th>Grade</th>
+                                    <th>Class</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in range(10) %}
+                                <tr>
+                                    <td>{{ subjects[i] }}</td>
+                                    <td>{{ marks[i] }}</td>
+                                    <td>{{ 'O+' if marks[i] >= 90 else 'D' if marks[i] >= 80 else 'A' if marks[i] >= 70 else 'B' if marks[i] >= 60 else 'C' if marks[i] >= 50 else 'F' }}</td>
+                                    <td>{{ 'OUTSTANDING' if marks[i] >= 90 else 'FIRST CLASS WITH DISTINCTION' if marks[i] >= 80 else 'First Class' if marks[i] >= 70 else 'Second Class' if marks[i] >= 60 else 'Pass' if marks[i] >= 50 else 'Fail' }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container">
+                        {% set marks = [details_dict.practical1|int, details_dict.practical2|int, details_dict.practical3|int, details_dict.practical4|int, details_dict.practical5|int, details_dict.practical6|int, details_dict.practical7|int] %}
+                        {% set subjects = ["PROGRAMMING IN C", "DATA STRUCTURES USING C", "SQL FOR RDBMS", "PROGRAMMING IN JAVA", "WEB TECHNOLOGY", "LINUX AND SHELL PROGRAMMING", "MOBILE APPLICATION DEVELOPMENT"] %}
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <h4>PRACTICAL MARKS</h4>
+                                <BR>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th>Marks</th>
+                                            <th>Grade</th>
+                                            <th>Class</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in range(7) %}
+                                        <tr>
+                                            <td>{{ subjects[i] + " PRACTICAL" }}</td>
+                                            <td>{{ marks[i] }}</td>
+                                            <td>{{ 'O+' if marks[i] >= 90 else 'D' if marks[i] >= 80 else 'A' if marks[i] >= 70 else 'B' if marks[i] >= 60 else 'C' if marks[i] >= 50 else 'F' }}</td>
+                                            <td>{{ 'OUTSTANDING' if marks[i] >= 90 else 'FIRST CLASS WITH DISTINCTION' if marks[i] >= 80 else 'First Class' if marks[i] >= 70 else 'Second Class' if marks[i] >= 60 else 'Pass' if marks[i] >= 50 else 'Fail' }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                </div>
+                
+                <br><br><br>
+
+                <h4>VISUALIZATION OF YOUR RESULTS</h4>
+                <div class="visual" style="padding: 5% 50%;">
+                    <div class="col-md-6">
+                        <div id="bar-chart" style="padding: 2% 50%; width: 100%; height: 500px;"></div>
+                    </div>
+
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+
+                    <div class="col-md-6">
+                        <div id="scatter-chart" style="padding: 5% 50%; width: 80%; height: 500px;"></div>
+                    </div>
+
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    
+                    <div class="col-md-6">
+                        <div id="pie-chart" style="padding: 5% 50%; width: 100%; height: 200px;"></div>
+                    </div>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br>    
+                    <br><br><br>
+                
+                    
+                    
+                    
+                </div>
+                  
+                <div class="visual"></div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+</div>
+
+<script>
+    var percentage=document.getElementById('percentage').value;
+    var grade = document.getElementById('grade');
+    var class_division = document.getElementById('class-division');
+    if (percentage >= 90) {
+        grade.value = 'O';
+        class_division.value = 'OUTSTANDING';
+    } else if (percentage >= 80) {
+        grade.value = 'D';
+        class_division.value = 'FIRST CLASS WITH DISTINCTION';
+    } else if (percentage >= 70) {
+        grade.value = 'A';
+        class_division.value = 'First Class';
+    } else if (percentage >= 60) {
+        grade.value = 'B';
+        class_division.value = 'Second Class';
+    } else if (percentage >= 50) {
+        grade.value = 'C';
+        class_division.value = 'Pass';
+    } else {
+        grade.value = 'F';
+        class_division.value = 'Fail';
+    }
+</script>
+<br><br><br>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawCharts);
+  
+    function drawCharts() {
+      var table = document.querySelectorAll('table')[0];
+      var rows = table.querySelectorAll('tbody tr');
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Subject');
+      data.addColumn('number', 'Marks');
+  
+      rows.forEach(function(row) {
+        var cells = row.querySelectorAll('td');
+        var subject = cells[0].innerText;
+        var marks = parseInt(cells[1].innerText);
+        data.addRow([subject,marks]);
+      });
+  
+      var optionsBar = {
+        title: 'Theory Marks',
+        legend: { position: 'none' },
+        hAxis: {
+          title: 'Marks',
+          minValue:40,
+          maxValue:100
+        },
+        vAxis: {
+          title: 'Subjects'
+        },
+        width:1100,
+        height:1100
+      };
+  
+      var optionsScatter = {
+        title: 'Marks Scatter Plot',
+        legend: { position: 'none' },
+    
+        vAxis: {
+          minValue: 40,
+          maxValue: 100
+        },
+        width:1550,
+        height:500
+      };
+      
+      var optionsLine = {
+        title: 'Marks Line Plot',
+        legend: { position: 'none' },
+        hAxis: {
+            title: 'Subjects'
+        },
+        vAxis: {
+            title: 'Marks',
+            minValue: 0,
+            maxValue: 100
+        },
+        width: 800,
+        height: 800,
+        curveType:'None'
+        //curveType: 'function' // This will make the lines smooth
+      };
+
+      var optionsPie = {
+        title: 'Marks Distribution',
+        width: 1000,
+        height: 1000
+      };
+
+      var barChart = new google.visualization.BarChart(document.getElementById('bar-chart'));
+      barChart.draw(data, optionsBar); 
+  
+      var scatterChart = new google.visualization.ScatterChart(document.getElementById('scatter-chart'));
+      scatterChart.draw(data, optionsScatter);
+
+      var pieChart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+      pieChart.draw(data, optionsPie);
+    
+    }
+  
+    document.querySelectorAll('table')[0].addEventListener('mouseover', function(e) {
+      if (e.target.tagName === 'TD') {
+        var subject = e.target.closest('tr').querySelector('td').innerText;
+        var marks = e.target.innerText;
+        e.target.title = subject + ': ' + marks; 
+      }
+    });
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <div class="navs">
+
+                    <a href="{{ url_for('profile') }}" class="btn btn-primary" style="background-color: aqua; padding: 10px 20px; font-weight: bolder; border-radius: 10px; text-decoration: none;">Profile</a>
+                    <a href="{{ url_for('logged_in') }}" class="btn btn-primary" style="background-color: aqua; padding: 10px 20px; font-weight: bolder; border-radius: 10px; text-decoration: none;">Index </a>
+                    <a href="{{ url_for('home') }}" class="btn btn-primary" style="background-color: aqua; padding: 10px 20px; font-weight: bolder; border-radius: 10px; text-decoration: none;">Home</a>
+                    <a href="{{ url_for('logout') }}" class="btn btn-primary" style="background-color: aqua; padding: 10px 20px; font-weight: bolder; border-radius: 10px; text-decoration: none;">Logout</a>
+                </div>
+                <br><br><br>
+                    <br><br><br>
+                    
+                    
+
+
+
+
+
+{% endblock %}
