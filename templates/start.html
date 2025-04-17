@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .container{
+        padding-top: 5%;
+        padding-left: 25%;
+        padding-right: 25%;
+    }
+    .form-section{
+        display: flex;
+        justify-content: center;
+        gap: 7cm;
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-top: 10%;
+    }
+    .student-details{
+        width: 100%;
+        align-items: center;
+        display: none;
+    }
+    .theory-marks{
+        display: none;
+    }
+    .practical-marks{
+        display: none;
+    }
+    .student-details .form-group{
+        gap: 1cm;
+    }
+    .student-details label{
+        width: 10%;
+    }
+    .student-details .form-group input{
+        width: 120%;
+    }
+    .form-group{
+        display: flex;
+        justify-content: center;
+        gap: 5cm;
+    }
+    .form-group label{
+        width: 75%;
+    }
+    .form-control{
+        width: 25%;
+        border-color: black;
+    }
+    h3{
+        text-align: center;
+    }
+</style>
+<div class="container">
+    <h2 style="text-align: center;">Get Started</h2>
+    <form action="/submit_data" method="post">
+        <div class="form-section" style="display: flex; justify-content: center; gap: 7cm; padding-left: 25%; padding-right: 25%; padding-top: 10%;">
+            <button type="button" class="btn btn-secondary" style="border-radius:50% ;" onclick="showSection('student-details')">1</button>
+            <button type="button" class="btn btn-secondary" style="border-radius: 50%;" onclick="showSection('theory-marks')">2</button>
+            <button type="button" class="btn btn-secondary" style="border-radius: 50%;" onclick="showSection('practical-marks')">3</button>
+            <button type="button" class="btn btn-secondary" style="border-radius: 50%;" onclick="showSection('allied-marks')">4</button>
+        </div>
+        <br>
+        <div id="student-details" class="student-details" style="display: none;">
+            <br><br>
+            <h3>Student Details</h3>
+            <br>
+            <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>    
+            <br><br>
+            <div class="form-group">
+            <label for="register_number">Register Number:</label>
+            <input type="text" class="form-control" id="register_number" name="register_number" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="roll_number">Roll Number:</label>
+            <input type="text" class="form-control" id="roll_number" name="roll_number" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="text" class="form-control" id="dob" name="dob" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Select Date" required>
+            </div>
+        </div>
+        <br>
+        <div id="theory-marks" class="theory-marks" style="display: none;">
+            <br><br>
+            <h3>Theory Marks</h3>
+            <br>
+            <div class="form-group">
+                <label for="subject1">PROGRAMMING IN C MARK:</label>
+                <input type="number" class="form-control" id="subject1" name="subject1" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject2">DATA STRUCTURES AND ALGORITHMS MARK:</label>
+                <input type="number" class="form-control" id="subject2" name="subject2" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject3">COMPUTER ORGANIZATION AND ARCHITECTURE MARK:</label>
+                <input type="number" class="form-control" id="subject3" name="subject3" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject4">RELATIONAL DATABASE MANAGEMENT SYSTEM MARK:</label>
+                <input type="number" class="form-control" id="subject4" name="subject4" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject5">COMPUTER NETWORK MARK:</label>
+                <input type="number" class="form-control" id="subject5" name="subject5" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject6">PROGRAMMING IN JAVA MARK:</label>
+                <input type="number" class="form-control" id="subject6" name="subject6" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject7">OPERATING SYSTEM MARK:</label>
+                <input type="number" class="form-control" id="subject7" name="subject7" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject8">WEB TECHNOLOGY MARK:</label>
+                <input type="number" class="form-control" id="subject8" name="subject8" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject9">LINUX AND SHELL PROGRAMMING MARK:</label>
+                <input type="number" class="form-control" id="subject9" name="subject9" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="subject10">SOFTWARE ENGINEERING MARK:</label>
+                <input type="number" class="form-control" id="subject10" name="subject10" required>
+            </div>
+        </div>
+        
+        <br>
+        <div id="practical-marks" class="practical-marks" style="display: none;">
+            <br><br>
+            <h3>Practical Marks</h3>
+            <br>
+            <div class="form-group">
+                <label for="practical1">PROGRAMMING IN C PRACTICAL:</label>
+                <input type="number" class="form-control" id="practical1" name="practical1" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="practical2">DATA STRUCTURES USING C PRACTICAL:</label>
+                <input type="number" class="form-control" id="practical2" name="practical2" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="practical3">SQL FOR RDBMS PRACTICAL:</label>
+                <input type="number" class="form-control" id="practical3" name="practical3" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="practical4">PROGRAMMING IN JAVA PRACTICAL:</label>
+                <input type="number" class="form-control" id="practical4" name="practical4" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="practical5">WEB TECHNOLOGY PRACTICAL:</label>
+                <input type="number" class="form-control" id="practical5" name="practical5" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="practical6">LINUX AND SHELL PROGRAMMING PRACTICAL:</label>
+                <input type="number" class="form-control" id="practical6" name="practical6" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="practical7">MOBILE APPLICATION DEVELOPMENT PRACTICAL:</label>
+                <input type="number" class="form-control" id="practical7" name="practical7" required>
+            </div>
+        </div>  
+        
+        <br>
+        <div id="allied-marks" class="allied-marks" style="display: none;">
+            <br><br>
+            <h3>Allied Marks</h3>
+            <br>
+            <div class="form-group">
+            <label for="a1t1">Allied Maths Theory 1:</label>
+            <input type="number" class="form-control" id="a1t1" name="a1t1" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="a1t2">Allied Maths Theory 2:</label>
+            <input type="number" class="form-control" id="a1t2" name="a1t2" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="a1p">Allied Maths Practical:</label>
+            <input type="number" class="form-control" id="a1p" name="a1p" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="a2t1">Allied Physics Theory 1:</label>
+            <input type="number" class="form-control" id="a2t1" name="a2t1" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="a2t2">Allied Physics Theory 2:</label>
+            <input type="number" class="form-control" id="a2t2" name="a2t2" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+            <label for="a2p">Allied Physics Practical:</label>
+            <input type="number" class="form-control" id="a2p" name="a2p" required>
+            </div>
+        </div>  
+
+        <script>
+            function showSection(sectionId) {
+            document.getElementById('student-details').style.display = 'none';
+            document.getElementById('theory-marks').style.display = 'none';
+            document.getElementById('practical-marks').style.display = 'none';
+            document.getElementById('allied-marks').style.display = 'none';
+            document.getElementById(sectionId).style.display = 'block';
+            }
+        </script>
+        <div style="display: flex; justify-content: center;">
+            <button type="submit" class="btn btn-primary" >Submit</button>
+        </div>
+        <br><br><br>
+    </form>
+    <style>
+        h3{
+            text-align: center;
+        }
+    </style>
+</div>
+{% endblock %}
