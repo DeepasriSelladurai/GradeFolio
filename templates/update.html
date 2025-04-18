@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% block content %}
+<script>
+        function showEditPopup() {
+            document.getElementById('editPopup').style.display = 'block';
+        }
+
+    document.getElementById('student-details-edit').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    fetch('/update_data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.status === 'success') {
+            alert(result.message);
+        } else {
+            alert(result.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+
+        function generateEditForm() {
+            const formElements = document.querySelectorAll('#editPopup input[type="checkbox"]');
+            const formContainer = document.getElementById('student-details-edit');
+            formContainer.innerHTML = '<h3>Student Details</h3><br>';
+
+            formElements.forEach((element) => {
+                if (element.checked) {
+                    const label = document.createElement('label');
+                    label.setAttribute('for', element.value);
+                    label.textContent = element.value.charAt(0).toUpperCase() + element.value.slice(1) + ':';
+
+                    const input = document.createElement('input');
+                    input.setAttribute('type', element.getAttribute('data-type'));
+                    input.setAttribute('class', 'form-control');
+                    input.setAttribute('id', element.value);
+                    input.setAttribute('name', element.value);
+                    input.required = true;
+
+                    formContainer.appendChild(label);
+                    formContainer.appendChild(input);
+                    formContainer.appendChild(document.createElement('br'));
+                    formContainer.appendChild(document.createElement('br'));
+                
+                }
+            });
+
+            const submitButton = document.createElement('input');
+            submitButton.setAttribute('type', 'submit');
+            submitButton.setAttribute('value', 'Update Data');
+            formContainer.appendChild(submitButton);
+
+            document.getElementById('student-details-edit').style.display = 'block';
+            document.getElementById('editPopup').style.display = 'none';
+        }
+    </script>
+    <style>
+        #editPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 1px solid black;
+            padding: 20px;
+            z-index: 1000;
+        }
+        .student-details-edit {
+            display: none;
+        }
+        .container{
+            padding: 15%;
+            display: flex;
+            justify-content:space-between;
+        }
+        
+h2, h3 {
+    color: #333;
+}
+
+form {
+    background: white;
+    padding: 20%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="email"], input[type="number"], input[type="date"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+input[type="submit"], button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    justify-content: center;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #0056b3;
+}
+
+#editPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #ddd;
+    padding: 2%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+
+
+#editPopupForm label {
+    margin-bottom: 10px;
+}
+
+#student-details-edit h3 {
+    margin-top: 0;
+}
+
+#student-details-edit {
+    display: none;
+    max-width: 600px;
+    margin: auto;
+    padding: 2%;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #0000001a;
+}
+.container{
+    gap: 12cm;
+}
+    </style>
+
+
+<div class="container">
+    <h2>Update Student Details</h2>
+    <button onclick="showEditPopup()">Edit</button>
+</div>
+    <div id="editPopup">
+        <h3>Select Data to Edit</h3>
+        <form id="editPopupForm" onsubmit="generateEditForm(); return false;">
+            <label><input type="checkbox" value="name" data-type="text"> Name</label><br>
+            <label><input type="checkbox" value="email" data-type="email"> Email</label><br>
+            <label><input type="checkbox" value="phone" data-type="text"> Phone</label><br>
+            <label><input type="checkbox" value="register_number" data-type="text"> Register Number</label><br>
+            <label><input type="checkbox" value="roll_number" data-type="text"> Roll Number</label><br>
+            <label><input type="checkbox" value="dob" data-type="date"> Date of Birth</label><br><br>
+            <input type="submit" value="Edit">
+        </form>
+        <br><br><br>
+    </div>
+    <br><br>
+    <form action="/update_data" method="POST" id="student-details-edit" class="student-details-edit">
+        <!-- Generated form fields will appear here -->
+         <br><br><br><br>
+        <button type="submit" value="Update Data">
+        <br><br><br>
+    </form>
+    <br><br><br><br>
+</div>
+<div id="notification" class="notification"></div>
+    <script>
+        $(document).ready(function() {
+            $('#updateForm').on('submit', function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/update_data',
+                    data: formData,
+                    success: function(response) {
+                        showNotification(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        showNotification('An error occurred: ' + error);
+                    }
+                });
+            });
+
+            function showNotification(message) {
+                var notification = document.getElementById('notification');
+                notification.style.display = 'block';
+                var count = 3;
+                notification.innerHTML = '<p><strong>' + message + ' (' + count + ')</strong></p>';
+                var countdown = setInterval(function() {
+                    if (count > 0) {
+                        notification.innerHTML = '<p><strong>' + message + ' (' + count + ')</strong></p>';
+                        count--;
+                    } else {
+                        clearInterval(countdown);
+                        notification.style.display = 'none';
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+    <style>
+        .notification {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+<br><br><br>
+{% endblock %}
