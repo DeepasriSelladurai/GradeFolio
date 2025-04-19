@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawCharts);
+    
+        function drawCharts() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Subject');
+            data.addColumn('number', 'Marks');
+    
+            var subjects = ["PROGRAMMING IN C","DATA STRUCTURES AND ALGORITHMS","COMPUTER ORGANIZATION AND ARCHITECTURE","RELATIONAL DATABASE MANAGEMENT SYSTEM","COMPUTER NETWORK","PROGRAMMING IN JAVA","OPERATING SYSTEM","WEB TECHNOLOGY","LINUX AND SHELL PROGRAMMING","SOFTWARE ENGINEERING"];
+            var marks = marks;
+    
+            for (var i = 0; i < subjects.length; i++) {
+                data.addRow([subjects[i], marks[i]]);
+            }
+    
+            var optionsBar = {
+                title: 'Theory Marks',
+                legend: { position: 'none' },
+                hAxis: {
+                    title: 'Marks',
+                    minValue: 40,
+                    maxValue: 100
+                },
+                vAxis: {
+                    title: 'Subjects'
+                },
+                width: 1100,
+                height: 1100
+            };
+    
+            var optionsScatter = {
+                title: 'Marks Scatter Plot',
+                legend: { position: 'none' },
+                hAxis: {
+                    title: 'Subjects'
+                },
+                vAxis: {
+                    title: 'Marks',
+                    minValue: 40,
+                    maxValue: 100
+                },
+                width: 1250,
+                height: 750
+            };
+            
+            var optionsPie = {
+                title: 'Marks Distribution',
+                width: 1000,
+                height: 1000
+            };
+
+            var barChart = new google.visualization.BarChart(document.getElementById('bar-chart'));
+            barChart.draw(data, optionsBar); 
+    
+            var scatterChart = new google.visualization.ScatterChart(document.getElementById('scatter-chart'));
+            scatterChart.draw(data, optionsScatter);
+
+            var pieChart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+            pieChart.draw(data, optionsPie);
+        }
+    </script>
+</head>
+<body>
+    <div id="bar-chart"></div>
+    <div id="scatter-chart"></div>
+    <div id="pie-chart"></div>
+
+    
+</body>
+</html>
