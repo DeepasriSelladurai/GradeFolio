@@ -261,7 +261,8 @@ def update():
 @app.route('/update_data', methods=['POST'])
 def update_data():
     email=session["email"]
-    data = request.form.to_dict()  # Retrieve form data as a dictionary
+    data = request.form.to_dict()  
+    # Retrieve form data as a dictionary
     
     if not data or not email:
         return jsonify({'status': 'failure', 'message': 'Invalid data'}), 400
