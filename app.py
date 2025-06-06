@@ -195,6 +195,7 @@ def leaderboard():
         details_collection = records.database['Details']
         student_details = details_collection.find_one({"email": email})
         collection=details_collection.find()
+        
         details_dict = student_details if student_details else {}
 
         return render_template('leaderboard.html', email=email, name=name,collection=collection, details_dict=details_dict)
