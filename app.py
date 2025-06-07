@@ -70,6 +70,7 @@ def index():
         user_found = records.find_one({"name": user})
         email_found = records.find_one({"email": email})
         if user_found:
+
             message = 'There already is a user by that name'
             return render_template('index.html', message=message)
         
@@ -118,6 +119,7 @@ def login():
             if bcrypt.checkpw(password.encode('utf-8'), passwordcheck):
                 session["email"] = email_val
                 return redirect(url_for('logged_in'))
+            
             else:
                 if "email" in session:
                     return redirect(url_for("logged_in"))
